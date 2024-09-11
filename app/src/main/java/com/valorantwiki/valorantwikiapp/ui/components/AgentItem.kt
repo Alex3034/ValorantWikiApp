@@ -68,10 +68,6 @@ fun AgentItem(agent: Agent, onAgentClick: () -> Unit) {
                 ) {
                     Text(text = agent.displayName, style = MaterialTheme.typography.titleLarge)
                 }
-                Text(
-                    text = "Role: ${agent.role?.displayName ?: "N/A"}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
             }
             IconButton(
                 onClick = { onAgentClick() },

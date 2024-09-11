@@ -1,4 +1,4 @@
-package com.valorantwiki.valorantwikiapp.data.api.RemoteResults
+package com.valorantwiki.valorantwikiapp.data.RemoteResults
 
 
 import kotlinx.serialization.SerialName
@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AgentsResponse(
     @SerialName("data")
-    val `data`: List<AgentData>,
+    val `data`: List<RemoteAgent>,
     @SerialName("status")
     val status: Int
 )

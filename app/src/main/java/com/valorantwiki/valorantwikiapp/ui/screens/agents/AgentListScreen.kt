@@ -1,5 +1,6 @@
 package com.valorantwiki.valorantwikiapp.ui.screens.agents
 
+import android.Manifest
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,14 +14,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.personalapps.mymoviedb.ui.common.PermissionRequestEffect
+import com.personalapps.mymoviedb.ui.common.getRegion
 import com.valorantwiki.valorantwikiapp.R
 import com.valorantwiki.valorantwikiapp.data.model.Agent
 import com.valorantwiki.valorantwikiapp.ui.components.AgentItem
 import com.valorantwiki.valorantwikiapp.ui.theme.ValorantWikiAppTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun Screen(content: @Composable () -> Unit) {
@@ -35,13 +41,18 @@ fun Screen(content: @Composable () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgentListScreen(onAgentClick: (Agent) -> Unit, viewModel: AgentViewModel = viewModel()) {
+fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = viewModel()) {
+
+    val ctx = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) { granted ->
+        coroutineScope.launch {
+            vm.onUiReady()
+        }
+    }
 
     Screen {
-
-        val agents = viewModel.agents.value
-        val isLoading = viewModel.isLoading.value
-        val error = viewModel.error.value
 
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -54,27 +65,19 @@ fun AgentListScreen(onAgentClick: (Agent) -> Unit, viewModel: AgentViewModel = v
             },
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
         ) { padding ->
-            when {
-                isLoading -> {
-                    CircularProgressIndicator(modifier = Modifier.padding(padding))
-                }
-
-                error != null -> {
-                    Text(text = error, modifier = Modifier.padding(padding))
-                }
-
-                else -> {
-                    LazyColumn(modifier = Modifier.padding(padding)) {
-                        items(agents) { agent ->
-                            AgentItem(
-                                agent = agent,
-                                onAgentClick = { onAgentClick(agent) }
-                            )
-                        }
-                    }
-                }
+            val state = vm.state
+            if (state.loading) {
+                CircularProgressIndicator(modifier = Modifier.padding(padding))
             }
 
+            LazyColumn(modifier = Modifier.padding(padding)) {
+                items(state.agent) { agent ->
+                    AgentItem(
+                        agent = agent,
+                        onAgentClick = { onAgentClick(agent) }
+                    )
+                }
+            }
         }
     }
 }

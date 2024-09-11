@@ -10,11 +10,11 @@ import androidx.navigation.navArgument
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentListScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentViewModel
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentScreen
+import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentViewModel
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val viewModel: AgentViewModel = viewModel()
 
     NavHost(navController, startDestination = "agentList") {
         composable("agentList") {
@@ -26,17 +26,15 @@ fun Navigation() {
         }
 
         composable(
-            "agentDetail/{agentId}",
-            arguments = listOf(navArgument("agentId") { type = NavType.StringType })
+            "agentDetail/{agentUuid}",
+            arguments = listOf(navArgument("agentUuid") { type = NavType.IntType })
         ) { backStackEntry ->
-            val agentId = requireNotNull(backStackEntry.arguments?.getString("agentId"))
-            val agent = viewModel.getAgentById(agentId)
-            if (agent != null) {
-                DetailAgentScreen(
-                    agent = agent,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+            val agentUuid = requireNotNull(backStackEntry.arguments?.getInt("agentUuid"))
+            DetailAgentScreen(
+                viewModel { DetailAgentViewModel(agentUuid) },
+                onBack = { navController.popBackStack() }
+            )
+
         }
     }
 }

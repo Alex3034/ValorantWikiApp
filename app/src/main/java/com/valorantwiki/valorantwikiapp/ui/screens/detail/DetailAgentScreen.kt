@@ -25,11 +25,13 @@ import com.valorantwiki.valorantwikiapp.data.model.Agent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailAgentScreen(agent:Agent, onBack: () -> Unit) {
+fun DetailAgentScreen(vm: DetailAgentViewModel, onBack: () -> Unit) {
+    val state = vm.state
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(agent.displayName) },
+                title = { Text(state.agent?.displayName ?:"") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.Close, contentDescription = "Volver")
@@ -44,25 +46,15 @@ fun DetailAgentScreen(agent:Agent, onBack: () -> Unit) {
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp)
         ) {
-            AsyncImage(
-                model = agent.fullPortrait,
-                contentDescription = "Retrato de ${agent.displayName}",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(300.dp),
-                contentScale = ContentScale.Fit
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Role: ${agent.role?.displayName ?: "N/A"}", style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = agent.description, style = MaterialTheme.typography.bodyMedium)
-            Spacer(modifier = Modifier.height(16.dp))
-            Text("Habilidades", style = MaterialTheme.typography.titleLarge)
-            Spacer(modifier = Modifier.height(8.dp))
-            agent.abilities.forEach { ability ->
-                Text(text = ability.displayName, style = MaterialTheme.typography.titleMedium)
-                Text(text = ability.description, style = MaterialTheme.typography.bodyMedium)
-                Spacer(modifier = Modifier.height(8.dp))
+            state.agent?.let { agent ->
+                AsyncImage(
+                    model = agent.fullPortrait,
+                    contentDescription = "Retrato de ${agent.displayName}",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp),
+                    contentScale = ContentScale.Fit
+                )
             }
         }
     }

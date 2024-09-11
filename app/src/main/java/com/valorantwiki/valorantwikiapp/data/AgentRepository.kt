@@ -1,7 +1,6 @@
 package com.valorantwiki.valorantwikiapp.data
 
-import com.valorantwiki.valorantwikiapp.data.api.RemoteResults.AgentData
-import com.valorantwiki.valorantwikiapp.data.api.RetrofitClient
+import com.valorantwiki.valorantwikiapp.data.RemoteResults.RemoteAgent
 import com.valorantwiki.valorantwikiapp.data.model.Agent
 
 class AgentRepository {
@@ -12,16 +11,19 @@ class AgentRepository {
             .getAgents()
             .data
             .map { it.toDomainModel() }
+
+    suspend fun findAgentById(id: Int): Agent =
+        RetrofitClient
+            .instance
+            .getAgentById(id)
+            .toDomainModel()
 }
 
-private fun AgentData.toDomainModel(): Agent =
+private fun RemoteAgent.toDomainModel(): Agent =
     Agent(
         uuid = uuid,
         displayName = displayName,
         description = description,
         displayIcon = displayIcon,
         fullPortrait = fullPortrait,
-        role = role?.toDomainModel(),
-        abilities = abilities.map { it.toDomainModel() }
-
     )
