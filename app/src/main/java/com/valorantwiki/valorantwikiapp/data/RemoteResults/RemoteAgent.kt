@@ -10,7 +10,7 @@ data class RemoteAgent(
     @SerialName("displayName") val displayName: String,
     @SerialName("description") val description: String,
     @SerialName("displayIcon") val displayIcon: String,
-    @SerialName("fullPortrait") val fullPortrait: String,
+    @SerialName("fullPortrait") val fullPortrait: String? = null,
 
     /*
     @SerialName("abilities")

@@ -11,5 +11,5 @@ interface AgentsService {
     suspend fun getAgents(): AgentsResponse
 
     @GET("v1/agents/{agentUuid}")
-    suspend fun getAgentById(@Path("uuid") id: Int): RemoteAgent
+    suspend fun getAgentById(@Path("agentUuid") uuid: String): RemoteAgent
 }

@@ -12,7 +12,7 @@ class AgentRepository {
             .data
             .map { it.toDomainModel() }
 
-    suspend fun findAgentById(id: Int): Agent =
+    suspend fun findAgentById(id: String): Agent =
         RetrofitClient
             .instance
             .getAgentById(id)

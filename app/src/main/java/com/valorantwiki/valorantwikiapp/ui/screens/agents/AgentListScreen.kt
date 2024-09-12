@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -43,7 +45,6 @@ fun Screen(content: @Composable () -> Unit) {
 @Composable
 fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = viewModel()) {
 
-    val ctx = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
     PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) { granted ->
@@ -65,7 +66,7 @@ fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = viewMode
             },
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
         ) { padding ->
-            val state = vm.state
+            val state by vm.state.collectAsState()
             if (state.loading) {
                 CircularProgressIndicator(modifier = Modifier.padding(padding))
             }

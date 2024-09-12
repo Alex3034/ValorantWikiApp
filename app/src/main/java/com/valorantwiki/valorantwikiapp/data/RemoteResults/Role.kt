@@ -4,6 +4,7 @@ package com.valorantwiki.valorantwikiapp.data.RemoteResults
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/*
 @Serializable
 data class Role(
     @SerialName("assetPath")
@@ -17,3 +18,5 @@ data class Role(
     @SerialName("uuid")
     val uuid: String
 )
+
+ */
