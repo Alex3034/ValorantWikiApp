@@ -5,6 +5,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class ApiResponse(
+    val status: Int,
+    val data: RemoteAgent
+)
+
+
+@Serializable
 data class RemoteAgent(
     @SerialName("uuid") val uuid: String,
     @SerialName("displayName") val displayName: String,

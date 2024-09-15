@@ -1,8 +1,5 @@
 package com.valorantwiki.valorantwikiapp.ui.screens.detail
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.valorantwiki.valorantwikiapp.data.AgentRepository
