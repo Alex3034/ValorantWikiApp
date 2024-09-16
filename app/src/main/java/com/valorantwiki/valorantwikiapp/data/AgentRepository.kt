@@ -16,10 +16,11 @@ class AgentRepository {
         RetrofitClient
             .instance
             .getAgentById(id)
+            .data
             .toDomainModel()
 }
 
-private fun RemoteAgent.toDomainModel(): Agent =
+fun RemoteAgent.toDomainModel(): Agent =
     Agent(
         uuid = uuid,
         displayName = displayName,

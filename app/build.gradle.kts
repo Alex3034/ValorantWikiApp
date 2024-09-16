@@ -55,6 +55,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
     // Coil para cargar imágenes
     implementation (libs.coil.kt.coil.compose)
