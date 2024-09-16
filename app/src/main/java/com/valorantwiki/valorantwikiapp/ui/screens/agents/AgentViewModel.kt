@@ -1,37 +1,35 @@
 package com.valorantwiki.valorantwikiapp.ui.screens.agents
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.valorantwiki.valorantwikiapp.data.api.RetrofitClient
+import com.valorantwiki.valorantwikiapp.data.AgentRepository
+import com.valorantwiki.valorantwikiapp.data.RetrofitClient
 import com.valorantwiki.valorantwikiapp.data.model.Agent
+import com.valorantwiki.valorantwikiapp.ui.screens.detail.UiState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AgentViewModel : ViewModel() {
 
-    val agents = mutableStateOf<List<Agent>>(emptyList())
-    val isLoading = mutableStateOf(false)
-    val error = mutableStateOf<String?>(null)
+    private var _state = MutableStateFlow(UiState())
+    val state get(): StateFlow<UiState> = _state.asStateFlow()
 
-    init {
-        fetchAgents()
-    }
+    private val repository = AgentRepository()
 
-    private fun fetchAgents() {
+    fun onUiReady() {
         viewModelScope.launch {
-            isLoading.value = true
-            try {
-                val response = RetrofitClient.instance.getAgents()
-                agents.value = response.data
-                error.value = null
-            } catch (e: Exception) {
-                error.value = "Error al cargar los agentes: ${e.message}"
-            }
-            isLoading.value = false
+            _state.value = UiState(loading = true)
+            _state.value = UiState(loading = false, agent = repository.fetchAgents())
         }
     }
 
-    fun getAgentById(agentId: String?): Agent? {
-        return agents.value.find { it.uuid == agentId }
-    }
+    data class UiState(
+        val agent: List<Agent> = emptyList(),
+        val loading: Boolean = false
+    )
 }

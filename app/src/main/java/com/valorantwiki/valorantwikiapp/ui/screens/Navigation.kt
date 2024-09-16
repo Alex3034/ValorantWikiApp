@@ -7,36 +7,37 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentListScreen
-import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentViewModel
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentScreen
+import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentViewModel
+import kotlinx.serialization.Serializable
+
+@Serializable
+object Agents
+
+@Serializable
+data class Detail(val id: String)
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val viewModel: AgentViewModel = viewModel()
 
-    NavHost(navController, startDestination = "agentList") {
-        composable("agentList") {
+    NavHost(navController, startDestination = Agents) {
+        composable<Agents> {
             AgentListScreen(
                 onAgentClick = { agent ->
-                    navController.navigate("agentDetail/${agent.uuid}")
+                    navController.navigate(Detail(agent.uuid))
                 }
             )
         }
 
-        composable(
-            "agentDetail/{agentId}",
-            arguments = listOf(navArgument("agentId") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val agentId = requireNotNull(backStackEntry.arguments?.getString("agentId"))
-            val agent = viewModel.getAgentById(agentId)
-            if (agent != null) {
-                DetailAgentScreen(
-                    agent = agent,
-                    onBack = { navController.popBackStack() }
-                )
-            }
+        composable<Detail> { backStackEntry ->
+            val detail:Detail = backStackEntry.toRoute()
+            DetailAgentScreen(
+                viewModel { DetailAgentViewModel(detail.id) },
+                onBack = { navController.popBackStack() }
+            )
         }
     }
 }

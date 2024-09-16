@@ -55,17 +55,13 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit.converter.kotlinx.serialization)
+    implementation(libs.logging.interceptor)
 
     // Coil para cargar imágenes
     implementation (libs.coil.kt.coil.compose)
 
     // ViewModels
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-
-    //Navigation
-    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -75,6 +71,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
