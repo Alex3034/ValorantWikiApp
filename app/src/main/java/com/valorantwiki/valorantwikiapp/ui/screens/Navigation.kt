@@ -7,41 +7,35 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentListScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentViewModel
+import kotlinx.serialization.Serializable
 
-sealed class NavScreen(val route: String) {
-    data object Agent : NavScreen("agents")
-    data object Detail : NavScreen("detail/{${NavArg.AgentId.key}}") {
-        fun createRoute(agentId: String) = "detail/$agentId"
-    }
-}
+@Serializable
+object Agents
 
-enum class NavArg(val key: String) {
-    AgentId("agentUuid")
-}
+@Serializable
+data class Detail(val id: String)
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController, startDestination = NavScreen.Agent.route) {
-        composable(NavScreen.Agent.route) {
+    NavHost(navController, startDestination = Agents) {
+        composable<Agents> {
             AgentListScreen(
                 onAgentClick = { agent ->
-                    navController.navigate(NavScreen.Detail.createRoute(agent.uuid))
+                    navController.navigate(Detail(agent.uuid))
                 }
             )
         }
 
-        composable(
-            NavScreen.Detail.route,
-            arguments = listOf(navArgument(NavArg.AgentId.key) { type = NavType.StringType })
-        ) { backStackEntry ->
-            val agentUuid = requireNotNull(backStackEntry.arguments?.getString(NavArg.AgentId.key))
+        composable<Detail> { backStackEntry ->
+            val detail:Detail = backStackEntry.toRoute()
             DetailAgentScreen(
-                viewModel { DetailAgentViewModel(agentUuid) },
+                viewModel { DetailAgentViewModel(detail.id) },
                 onBack = { navController.popBackStack() }
             )
         }
