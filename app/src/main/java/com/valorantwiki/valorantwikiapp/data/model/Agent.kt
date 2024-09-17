@@ -6,6 +6,7 @@ data class Agent(
     val description: String,
     val displayIcon: String,
     val fullPortrait: String?,
+    val background: String?,
     //val role: Role?,
     //val abilities: List<Ability>
 )
