@@ -1,5 +1,7 @@
 package com.valorantwiki.valorantwikiapp.data.model
 
+import androidx.compose.ui.graphics.Color
+
 data class Agent(
     val uuid: String,
     val displayName: String,
@@ -7,6 +9,7 @@ data class Agent(
     val displayIcon: String,
     val fullPortrait: String?,
     val background: String?,
+    val backgroundGradientColors: List<String>,
     //val role: Role?,
     //val abilities: List<Ability>
 )
