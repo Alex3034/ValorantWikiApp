@@ -18,16 +18,14 @@ data class RemoteAgent(
     @SerialName("description") val description: String,
     @SerialName("displayIcon") val displayIcon: String,
     @SerialName("fullPortrait") val fullPortrait: String? = null,
+    @SerialName("background") val background: String? = null,
+    @SerialName("backgroundGradientColors") val backgroundGradientColors: List<String>,
 
     /*
     @SerialName("abilities")
     val abilities: List<Ability>,
     @SerialName("assetPath")
     val assetPath: String,
-    @SerialName("background")
-    val background: String,
-    @SerialName("backgroundGradientColors")
-    val backgroundGradientColors: List<String>,
     @SerialName("bustPortrait")
     val bustPortrait: String,
     @SerialName("characterTags")

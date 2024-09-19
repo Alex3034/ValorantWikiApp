@@ -27,4 +27,6 @@ fun RemoteAgent.toDomainModel(): Agent =
         description = description,
         displayIcon = displayIcon,
         fullPortrait = fullPortrait,
+        background = background,
+        backgroundGradientColors = backgroundGradientColors,
     )
