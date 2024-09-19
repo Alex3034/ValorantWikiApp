@@ -4,6 +4,7 @@ package com.valorantwiki.valorantwikiapp.data.RemoteResults
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/*
 @Serializable
 data class Ability(
     @SerialName("description")
@@ -15,3 +16,4 @@ data class Ability(
     @SerialName("slot")
     val slot: String
 )
+ */

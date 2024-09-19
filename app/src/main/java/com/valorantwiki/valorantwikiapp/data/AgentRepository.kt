@@ -12,18 +12,21 @@ class AgentRepository {
             .data
             .map { it.toDomainModel() }
 
-    suspend fun findAgentById(id: Int): Agent =
+    suspend fun findAgentById(id: String): Agent =
         RetrofitClient
             .instance
             .getAgentById(id)
+            .data
             .toDomainModel()
 }
 
-private fun RemoteAgent.toDomainModel(): Agent =
+fun RemoteAgent.toDomainModel(): Agent =
     Agent(
         uuid = uuid,
         displayName = displayName,
         description = description,
         displayIcon = displayIcon,
         fullPortrait = fullPortrait,
+        background = background,
+        backgroundGradientColors = backgroundGradientColors,
     )

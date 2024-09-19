@@ -12,6 +12,7 @@ data class AgentsResponse(
     val status: Int
 )
 
+/*
 @Serializable
 data class RecruitmentData(
     @SerialName("counterId")
@@ -29,3 +30,5 @@ data class RecruitmentData(
     @SerialName("useLevelVpCostOverride")
     val useLevelVpCostOverride: Boolean
 )
+
+ */
