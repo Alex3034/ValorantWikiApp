@@ -17,20 +17,30 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import com.valorantwiki.valorantwikiapp.R
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.Screen
@@ -40,9 +50,19 @@ import com.valorantwiki.valorantwikiapp.ui.utils.toColor
 @Composable
 fun DetailAgentScreen(vm: DetailAgentViewModel, onBack: () -> Unit) {
 
-    Screen {
-        val state by vm.state.collectAsState()
+    val state by vm.state.collectAsState()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val snackbarHostState = remember { SnackbarHostState() }
 
+    LaunchedEffect(state.message) {
+        state.message?.let {
+            snackbarHostState.currentSnackbarData?.dismiss()
+            snackbarHostState.showSnackbar(it)
+            vm.onMessageShown()
+        }
+    }
+
+    Screen {
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -57,14 +77,15 @@ fun DetailAgentScreen(vm: DetailAgentViewModel, onBack: () -> Unit) {
             floatingActionButton = {
                 FloatingActionButton(
                     shape = MaterialTheme.shapes.extraLarge,
-                    onClick = { /*TODO*/ }) {
+                    onClick = { vm.onFavoriteClick() }) {
                     Icon(
                         imageVector = Icons.Default.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.add_to_favorite)
                     )
                 }
             },
-
+            snackbarHost = { SnackbarHost(hostState = snackbarHostState)},
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
             ) { paddingValues ->
             Column(
                 modifier = Modifier

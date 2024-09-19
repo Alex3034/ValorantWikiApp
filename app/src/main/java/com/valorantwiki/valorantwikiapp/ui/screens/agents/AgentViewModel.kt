@@ -1,14 +1,9 @@
 package com.valorantwiki.valorantwikiapp.ui.screens.agents
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.valorantwiki.valorantwikiapp.data.AgentRepository
-import com.valorantwiki.valorantwikiapp.data.RetrofitClient
 import com.valorantwiki.valorantwikiapp.data.model.Agent
-import com.valorantwiki.valorantwikiapp.ui.screens.detail.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
