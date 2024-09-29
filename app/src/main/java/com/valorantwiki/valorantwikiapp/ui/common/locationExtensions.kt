@@ -10,12 +10,12 @@ import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.valorantwiki.valorantwikiapp.data.DEFAULT_REGION
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
-const val DEFAULT_REGION = "US"
 
 suspend fun Context.getRegion(): String {
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
