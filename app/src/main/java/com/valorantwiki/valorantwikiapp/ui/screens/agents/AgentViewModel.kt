@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class AgentViewModel : ViewModel() {
+class AgentViewModel(
+    private val repository: AgentRepository
+) : ViewModel() {
 
     private var _state = MutableStateFlow(UiState())
     val state get(): StateFlow<UiState> = _state.asStateFlow()
-
-    private val repository = AgentRepository()
 
     fun onUiReady() {
         viewModelScope.launch {
