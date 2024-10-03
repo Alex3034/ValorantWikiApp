@@ -1,8 +1,8 @@
 package com.valorantwiki.valorantwikiapp.data.datasource
 
-import com.valorantwiki.valorantwikiapp.data.RemoteResults.RemoteAgent
-import com.valorantwiki.valorantwikiapp.data.RetrofitClient
-import com.valorantwiki.valorantwikiapp.data.model.Agent
+import com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults.RemoteAgent
+import com.valorantwiki.valorantwikiapp.data.datasource.remote.RetrofitClient
+import com.valorantwiki.valorantwikiapp.data.Agent
 
 class AgentsRemoteDataSource {
 

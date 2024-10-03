@@ -8,7 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.valorantwiki.valorantwikiapp.App
 import com.valorantwiki.valorantwikiapp.data.AgentRepository
+import com.valorantwiki.valorantwikiapp.data.datasource.AgentLocalDataSource
 import com.valorantwiki.valorantwikiapp.data.datasource.AgentsRemoteDataSource
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentListScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentViewModel
@@ -25,8 +27,11 @@ data class Detail(val id: String)
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val app = LocalContext.current.applicationContext as Application
-    val agentRepository = AgentRepository(AgentsRemoteDataSource())
+    val app = LocalContext.current.applicationContext as App
+    val agentRepository = AgentRepository(
+        AgentLocalDataSource(app.db.agentDao),
+        AgentsRemoteDataSource()
+    )
 
     NavHost(navController, startDestination = Agents) {
         composable<Agents> {

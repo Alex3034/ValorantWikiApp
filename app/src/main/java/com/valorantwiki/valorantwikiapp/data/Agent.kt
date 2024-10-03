@@ -1,8 +1,11 @@
-package com.valorantwiki.valorantwikiapp.data.model
+package com.valorantwiki.valorantwikiapp.data
 
-import androidx.compose.ui.graphics.Color
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Agent(
+    @PrimaryKey(autoGenerate = true)
     val uuid: String,
     val displayName: String,
     val description: String,

@@ -1,7 +1,7 @@
-package com.valorantwiki.valorantwikiapp.data
+package com.valorantwiki.valorantwikiapp.data.datasource.remote
 
-import com.valorantwiki.valorantwikiapp.data.RemoteResults.AgentsResponse
-import com.valorantwiki.valorantwikiapp.data.RemoteResults.ApiResponse
+import com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults.AgentsResponse
+import com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

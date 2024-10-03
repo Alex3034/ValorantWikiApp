@@ -1,13 +1,26 @@
 package com.valorantwiki.valorantwikiapp.data
 
+import com.valorantwiki.valorantwikiapp.data.datasource.AgentLocalDataSource
 import com.valorantwiki.valorantwikiapp.data.datasource.AgentsRemoteDataSource
-import com.valorantwiki.valorantwikiapp.data.model.Agent
 
 class AgentRepository(
+    private val localDataSource: AgentLocalDataSource,
     private val agentsRemoteDataSource: AgentsRemoteDataSource
 ) {
 
-    suspend fun fetchAgents(): List<Agent> = agentsRemoteDataSource.fetchAgents()
+    suspend fun fetchAgents(): List<Agent> {
+        if (localDataSource.isEmpty()) {
+            val agents = agentsRemoteDataSource.fetchAgents()
+            localDataSource.save(agents)
+        }
+        return localDataSource.getAllAgents()
+    }
 
-    suspend fun findAgentById(id: String): Agent = agentsRemoteDataSource.findAgentById(id)
+    suspend fun findAgentById(uuid: String): Agent {
+        if (localDataSource.getAgentById(uuid) == null) {
+            val agent = agentsRemoteDataSource.findAgentById(uuid)
+            localDataSource.save(listOf(agent))
+        }
+        return checkNotNull(localDataSource.getAgentById(uuid))
+    }
 }

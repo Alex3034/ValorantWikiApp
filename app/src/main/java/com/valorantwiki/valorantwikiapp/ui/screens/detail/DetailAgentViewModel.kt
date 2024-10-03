@@ -3,7 +3,7 @@ package com.valorantwiki.valorantwikiapp.ui.screens.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.valorantwiki.valorantwikiapp.data.AgentRepository
-import com.valorantwiki.valorantwikiapp.data.model.Agent
+import com.valorantwiki.valorantwikiapp.data.Agent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

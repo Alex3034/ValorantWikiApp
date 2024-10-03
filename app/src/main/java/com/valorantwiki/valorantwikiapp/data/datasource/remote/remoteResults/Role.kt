@@ -1,8 +1,5 @@
-package com.valorantwiki.valorantwikiapp.data.RemoteResults
+package com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults
 
-
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
 /*
 @Serializable
