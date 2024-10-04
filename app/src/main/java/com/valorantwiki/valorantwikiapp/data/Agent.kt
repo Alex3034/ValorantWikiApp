@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Agent(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val uuid: String,
     val displayName: String,
     val description: String,
