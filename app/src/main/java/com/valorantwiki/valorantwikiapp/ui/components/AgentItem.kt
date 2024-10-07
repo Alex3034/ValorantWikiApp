@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -30,12 +32,15 @@ import com.valorantwiki.valorantwikiapp.data.Agent
 fun AgentItem(agent: Agent, onAgentClick: () -> Unit) {
 
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = Color.DarkGray
+        ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Surface(
@@ -59,13 +64,18 @@ fun AgentItem(agent: Agent, onAgentClick: () -> Unit) {
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(text = agent.displayName, style = MaterialTheme.typography.titleLarge)
+                    Text(
+                        text = agent.displayName,
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleLarge)
                 }
             }
             IconButton(
                 onClick = { onAgentClick() },
             ) {
-                Icon(Icons.Default.Info, contentDescription = "Más información")
+                Icon(Icons.Default.Info,
+                    tint = Color.White,
+                    contentDescription = "Más información")
             }
         }
     }

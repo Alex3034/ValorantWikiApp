@@ -2,8 +2,10 @@ package com.valorantwiki.valorantwikiapp.ui.screens.agents
 
 import android.Manifest
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -65,7 +67,8 @@ fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = viewMode
                     scrollBehavior = scrollBehavior
                 )
             },
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            contentWindowInsets = WindowInsets.safeDrawing,
         ) { padding ->
             if (state.loading) {
                 Box(Modifier.fillMaxSize()) {
