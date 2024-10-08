@@ -5,18 +5,29 @@ import androidx.lifecycle.viewModelScope
 import com.valorantwiki.valorantwikiapp.data.AgentRepository
 import com.valorantwiki.valorantwikiapp.data.Agent
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DetailAgentViewModel(
-    private val agentUuid: String,
-    private val repository: AgentRepository
-) : ViewModel() {
+class DetailAgentViewModel(repository: AgentRepository, agentUuid: String) : ViewModel() {
 
-    private var _state = MutableStateFlow(UiState())
-    val state get(): StateFlow<UiState> = _state.asStateFlow()
+    private val message = MutableStateFlow<String?>(null)
+    val state: StateFlow<UiState> =
+        combine(repository.findAgentById(agentUuid), message) { agent, message ->
+            UiState(
+                loading = false,
+                agent = agent,
+                message = message
+            )
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = UiState(loading = true)
+        )
 
     data class UiState(
         val agent: Agent? = null,
@@ -24,19 +35,12 @@ class DetailAgentViewModel(
         val message: String? = null
     )
 
-    init {
-        viewModelScope.launch {
-            _state.value = UiState(loading = true)
-            _state.value = UiState(agent = repository.findAgentById(agentUuid))
-        }
-    }
-
     fun onFavoriteClick() {
-        _state.update { it.copy(message = "Agregado a favoritos") }
+        message.value = "Favorite added"
     }
 
     fun onMessageShown() {
-        _state.update { it.copy(message = null) }
+        message.value = null
     }
 }
 

@@ -5,14 +5,15 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.valorantwiki.valorantwikiapp.data.Agent
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AgentDao {
     @Query("SELECT * FROM Agent")
-    suspend fun getAllAgents(): List<Agent>
+    fun getAllAgents(): Flow<List<Agent>>
 
     @Query("SELECT * FROM Agent WHERE uuid = :uuid")
-    suspend fun getAgentById(uuid: String): Agent?
+    fun getAgentById(uuid: String): Flow<Agent?>
 
     @Query("SELECT COUNT(*) FROM Agent")
     suspend fun countAgents(): Int

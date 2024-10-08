@@ -2,25 +2,33 @@ package com.valorantwiki.valorantwikiapp.ui.screens.agents
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.valorantwiki.valorantwikiapp.data.AgentRepository
 import com.valorantwiki.valorantwikiapp.data.Agent
+import com.valorantwiki.valorantwikiapp.data.AgentRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
-class AgentViewModel(
-    private val repository: AgentRepository
-) : ViewModel() {
+@OptIn(ExperimentalCoroutinesApi::class)
+class AgentViewModel(repository: AgentRepository) : ViewModel() {
 
-    private var _state = MutableStateFlow(UiState())
-    val state get(): StateFlow<UiState> = _state.asStateFlow()
+    private val uiReady = MutableStateFlow(false)
+    val state: StateFlow<UiState> = uiReady
+            .filter { it }
+            .flatMapLatest { repository.agents }
+            .map { UiState(agent = it) }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = UiState(loading = true)
+            )
 
     fun onUiReady() {
-        viewModelScope.launch {
-            _state.value = UiState(loading = true)
-            _state.value = UiState(loading = false, agent = repository.fetchAgents())
-        }
+        uiReady.value = true
     }
 
     data class UiState(

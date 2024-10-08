@@ -2,25 +2,26 @@ package com.valorantwiki.valorantwikiapp.data
 
 import com.valorantwiki.valorantwikiapp.data.datasource.AgentLocalDataSource
 import com.valorantwiki.valorantwikiapp.data.datasource.AgentsRemoteDataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.transform
 
 class AgentRepository(
     private val localDataSource: AgentLocalDataSource,
-    private val agentsRemoteDataSource: AgentsRemoteDataSource
+    private val remoteDataSource: AgentsRemoteDataSource
 ) {
-
-    suspend fun fetchAgents(): List<Agent> {
-        if (localDataSource.isEmpty()) {
-            val agents = agentsRemoteDataSource.fetchAgents()
-            localDataSource.save(agents)
+    val agents: Flow<List<Agent>> = localDataSource.agents.onEach { localAgents ->
+        if (localAgents.isEmpty()) {
+            val remoteAgents = remoteDataSource.fetchAgents()
+            localDataSource.save(remoteAgents)
         }
-        return localDataSource.getAllAgents()
     }
 
-    suspend fun findAgentById(uuid: String): Agent {
-        if (localDataSource.getAgentById(uuid) == null) {
-            val agent = agentsRemoteDataSource.findAgentById(uuid)
-            localDataSource.save(listOf(agent))
+    fun findAgentById(uuid: String): Flow<Agent?> =
+        localDataSource.getAgentById(uuid).onEach {
+            if (it == null) {
+                val remoteAgent = remoteDataSource.findAgentById(uuid)
+                localDataSource.save(listOf(remoteAgent))
+            }
         }
-        return checkNotNull(localDataSource.getAgentById(uuid))
-    }
 }
