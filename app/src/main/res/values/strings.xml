@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Valorant WikiApp</string>
     <string name="add_to_favorite">add to favorite</string>
+    <string name="error">Error</string>
 </resources>

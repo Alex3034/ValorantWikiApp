@@ -46,7 +46,7 @@ fun Navigation() {
         composable<Detail> { backStackEntry ->
             val detail:Detail = backStackEntry.toRoute()
             DetailAgentScreen(
-                viewModel { DetailAgentViewModel(detail.id, agentRepository) },
+                viewModel { DetailAgentViewModel( agentRepository, detail.id) },
                 onBack = { navController.popBackStack() }
             )
         }
