@@ -1,6 +1,5 @@
 package com.valorantwiki.valorantwikiapp
 
-import com.valorantwiki.valorantwikiapp.data.Agent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted

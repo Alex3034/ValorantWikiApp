@@ -2,7 +2,7 @@ package com.valorantwiki.valorantwikiapp.data.datasource
 
 import com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults.RemoteAgent
 import com.valorantwiki.valorantwikiapp.data.datasource.remote.RetrofitClient
-import com.valorantwiki.valorantwikiapp.data.Agent
+import com.valorantwiki.valorantwikiapp.domain.Agent
 
 class AgentsRemoteDataSource {
 

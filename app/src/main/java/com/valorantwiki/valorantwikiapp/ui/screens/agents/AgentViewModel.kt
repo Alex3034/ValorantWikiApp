@@ -3,8 +3,7 @@ package com.valorantwiki.valorantwikiapp.ui.screens.agents
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.valorantwiki.valorantwikiapp.Result
-import com.valorantwiki.valorantwikiapp.data.Agent
-import com.valorantwiki.valorantwikiapp.data.AgentRepository
+import com.valorantwiki.valorantwikiapp.domain.Agent
 import com.valorantwiki.valorantwikiapp.stateAsResultIn
 import com.valorantwiki.valorantwikiapp.usecases.AgentsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi

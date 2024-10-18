@@ -36,7 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.valorantwiki.valorantwikiapp.R
-import com.valorantwiki.valorantwikiapp.data.Agent
+import com.valorantwiki.valorantwikiapp.domain.Agent
 import com.valorantwiki.valorantwikiapp.ui.common.AcScaffold
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.Screen
 import com.valorantwiki.valorantwikiapp.ui.utils.toColor

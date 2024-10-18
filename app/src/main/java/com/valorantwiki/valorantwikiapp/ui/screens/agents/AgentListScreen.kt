@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.personalapps.mymoviedb.ui.common.PermissionRequestEffect
 import com.valorantwiki.valorantwikiapp.R
-import com.valorantwiki.valorantwikiapp.data.Agent
+import com.valorantwiki.valorantwikiapp.domain.Agent
 import com.valorantwiki.valorantwikiapp.ui.common.AcScaffold
 import com.valorantwiki.valorantwikiapp.ui.components.AgentItem
 import com.valorantwiki.valorantwikiapp.ui.theme.ValorantWikiAppTheme

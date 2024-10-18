@@ -7,7 +7,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.valorantwiki.valorantwikiapp.Result
-import com.valorantwiki.valorantwikiapp.data.Agent
+import com.valorantwiki.valorantwikiapp.domain.Agent
 
 @OptIn(ExperimentalMaterial3Api::class)
 class DetailState(

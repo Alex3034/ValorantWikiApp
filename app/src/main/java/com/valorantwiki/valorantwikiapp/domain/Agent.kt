@@ -1,11 +1,6 @@
-package com.valorantwiki.valorantwikiapp.data
+package com.valorantwiki.valorantwikiapp.domain
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
 data class Agent(
-    @PrimaryKey
     val uuid: String,
     val displayName: String,
     val description: String,
