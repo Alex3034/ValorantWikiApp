@@ -1,6 +1,5 @@
 package com.valorantwiki.valorantwikiapp.ui.screens
 
-import android.app.Application
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -16,6 +15,9 @@ import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentListScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentViewModel
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentViewModel
+import com.valorantwiki.valorantwikiapp.usecases.AgentsUseCase
+import com.valorantwiki.valorantwikiapp.usecases.FindAgentByIdUseCase
+import com.valorantwiki.valorantwikiapp.usecases.ToggleFavoriteUseCase
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -39,14 +41,20 @@ fun Navigation() {
                 onAgentClick = { agent ->
                     navController.navigate(Detail(agent.uuid))
                 },
-                viewModel { AgentViewModel(agentRepository) }
+                viewModel { AgentViewModel(AgentsUseCase(agentRepository)) }
             )
         }
 
         composable<Detail> { backStackEntry ->
-            val detail:Detail = backStackEntry.toRoute()
+            val detail: Detail = backStackEntry.toRoute()
             DetailAgentScreen(
-                viewModel { DetailAgentViewModel( agentRepository, detail.id) },
+                viewModel {
+                    DetailAgentViewModel(
+                        detail.id,
+                        FindAgentByIdUseCase(agentRepository),
+                        ToggleFavoriteUseCase(agentRepository)
+                    )
+                },
                 onBack = { navController.popBackStack() }
             )
         }
