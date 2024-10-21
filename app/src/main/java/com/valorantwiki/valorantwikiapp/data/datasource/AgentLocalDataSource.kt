@@ -6,15 +6,21 @@ import com.valorantwiki.valorantwikiapp.domain.Agent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class AgentLocalDataSource(private val agentDao: AgentDao) {
-    val agents: Flow<List<Agent>> =
+interface AgentLocalDataSource {
+    val agents: Flow<List<Agent>>
+    fun getAgentById(uuid: String): Flow<Agent?>
+
+    suspend fun save(movies: List<Agent>)
+}
+
+class AgentRoomDataSource(private val agentDao: AgentDao) : AgentLocalDataSource {
+    override val agents: Flow<List<Agent>> =
         agentDao.getAllAgents().map { agents -> agents.map { it.toDomainAgent() } }
 
-    fun getAgentById(uuid: String): Flow<Agent?> =
+    override fun getAgentById(uuid: String): Flow<Agent?> =
         agentDao.getAgentById(uuid).map { it?.toDomainAgent() }
 
-    suspend fun isEmpty(): Boolean = agentDao.countAgents() == 0
-    suspend fun save(movies: List<Agent>) = agentDao.save(movies.map { it.toDbAgent() })
+    override suspend fun save(movies: List<Agent>) = agentDao.save(movies.map { it.toDbAgent() })
 }
 
 private fun DbAgent.toDomainAgent() = Agent(

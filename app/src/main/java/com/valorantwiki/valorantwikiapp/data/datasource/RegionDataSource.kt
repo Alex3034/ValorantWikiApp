@@ -7,12 +7,20 @@ import com.personalapps.mymoviedb.ui.common.getFromLocationCompat
 
 const val DEFAULT_REGION = "US"
 
-class RegionDataSource(app: Application,private val locationDataSource: LocationDataSource) {
-    private val geocoder = Geocoder(app)
+interface RegionDataSource {
+    suspend fun findLastRegion(): String
 
-    suspend fun findLastRegion(): String = locationDataSource.findLastRegion()?.toRegion() ?: DEFAULT_REGION
+    suspend fun Location.toRegion(): String
+}
 
-    private suspend fun Location.toRegion(): String {
+class GeocoderRegionDataSource(
+    private val geocoder: Geocoder,
+    private val locationDataSource: LocationDataSource
+) : RegionDataSource {
+
+    override suspend fun findLastRegion(): String = locationDataSource.findLastRegion()?.toRegion() ?: DEFAULT_REGION
+
+    override suspend fun Location.toRegion(): String {
         val addresses = geocoder.getFromLocationCompat(latitude, longitude, 1)
         val region = addresses.firstOrNull()?.countryCode
         return region ?: DEFAULT_REGION

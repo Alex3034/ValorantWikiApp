@@ -1,22 +1,27 @@
 package com.valorantwiki.valorantwikiapp.data.datasource
 
+import com.valorantwiki.valorantwikiapp.data.datasource.remote.AgentsService
 import com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults.RemoteAgent
 import com.valorantwiki.valorantwikiapp.data.datasource.remote.RetrofitClient
 import com.valorantwiki.valorantwikiapp.domain.Agent
 
-class AgentsRemoteDataSource {
+interface AgentsRemoteDataSource {
+    suspend fun fetchAgents(): List<Agent>
 
-    suspend fun fetchAgents(): List<Agent> =
-        RetrofitClient
-            .instance
-            .getAgents()
+    suspend fun findAgentById(id: String): Agent
+}
+
+class AgentsServerDataSource(
+    private val agentsService: AgentsService
+) : AgentsRemoteDataSource {
+
+    override suspend fun fetchAgents(): List<Agent> =
+        agentsService.getAgents()
             .data
             .map { it.toDomainModel() }
 
-    suspend fun findAgentById(id: String): Agent =
-        RetrofitClient
-            .instance
-            .getAgentById(id)
+    override suspend fun findAgentById(id: String): Agent =
+        agentsService.getAgentById(id)
             .data
             .toDomainModel()
 }
