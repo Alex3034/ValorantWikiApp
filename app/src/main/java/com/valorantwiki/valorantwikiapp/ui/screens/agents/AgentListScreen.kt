@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.personalapps.mymoviedb.ui.common.PermissionRequestEffect
 import com.valorantwiki.valorantwikiapp.R
@@ -62,7 +63,9 @@ fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = viewMode
             contentWindowInsets = WindowInsets.safeDrawing,
         ) { padding, agents ->
 
-            LazyColumn(modifier = Modifier.padding(padding)) {
+            LazyColumn(
+                contentPadding = padding,
+                modifier = Modifier.padding(horizontal = 4.dp)) {
                 items(agents, key = { it.uuid }) {
                     AgentItem(
                         agent = it,

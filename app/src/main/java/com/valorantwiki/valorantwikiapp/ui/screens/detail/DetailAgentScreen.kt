@@ -79,7 +79,6 @@ fun DetailAgentScreen(vm: DetailAgentViewModel, onBack: () -> Unit) {
         ) { padding, agent ->
             DetailAgentScreen(
                 agent = agent,
-                modifier = Modifier.padding(padding),
                 padding = padding
             )
         }
@@ -89,7 +88,6 @@ fun DetailAgentScreen(vm: DetailAgentViewModel, onBack: () -> Unit) {
 @Composable
 private fun DetailAgentScreen(
     agent: Agent,
-    modifier: Modifier = Modifier,
     padding: PaddingValues
 ) {
     Column(
