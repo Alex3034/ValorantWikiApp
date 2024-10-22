@@ -1,4 +1,4 @@
-package com.valorantwiki.valorantwikiapp.data.datasource.remote.remoteResults
+package com.valorantwiki.valorantwikiapp.framework.remote.remoteResults
 
 
 /*

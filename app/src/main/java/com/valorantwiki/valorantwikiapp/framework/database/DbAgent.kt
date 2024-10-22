@@ -1,4 +1,4 @@
-package com.valorantwiki.valorantwikiapp.data.datasource.database
+package com.valorantwiki.valorantwikiapp.framework.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

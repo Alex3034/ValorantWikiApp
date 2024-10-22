@@ -8,19 +8,7 @@ import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class LocationDataSource(app: Application) {
-    private val fusedLocationClient = LocationServices.getFusedLocationProviderClient(app)
-
-    suspend fun findLastRegion(): Location? = fusedLocationClient.lastLocation()
+interface LocationDataSource {
+    suspend fun findLastLocation(): Location?
 }
 
-@SuppressLint("MissingPermission")
-private suspend fun FusedLocationProviderClient.lastLocation(): Location? {
-    return suspendCancellableCoroutine { continuation ->
-        lastLocation.addOnSuccessListener { location ->
-            continuation.resume(location)
-        }.addOnFailureListener {
-            continuation.resume(null)
-        }
-    }
-}

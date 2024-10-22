@@ -1,4 +1,4 @@
-package com.valorantwiki.valorantwikiapp.data.datasource.remote
+package com.valorantwiki.valorantwikiapp.framework.remote
 
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

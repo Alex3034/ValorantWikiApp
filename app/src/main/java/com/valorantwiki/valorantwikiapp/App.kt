@@ -2,7 +2,7 @@ package com.valorantwiki.valorantwikiapp
 
 import android.app.Application
 import androidx.room.Room
-import com.valorantwiki.valorantwikiapp.data.datasource.database.AgentsDataBase
+import com.valorantwiki.valorantwikiapp.framework.database.AgentsDataBase
 
 class App: Application() {
 

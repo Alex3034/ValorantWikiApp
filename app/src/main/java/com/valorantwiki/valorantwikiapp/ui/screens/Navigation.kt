@@ -9,9 +9,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.valorantwiki.valorantwikiapp.App
 import com.valorantwiki.valorantwikiapp.data.AgentRepository
-import com.valorantwiki.valorantwikiapp.data.datasource.AgentRoomDataSource
-import com.valorantwiki.valorantwikiapp.data.datasource.AgentsServerDataSource
-import com.valorantwiki.valorantwikiapp.data.datasource.remote.RetrofitClient
+import com.valorantwiki.valorantwikiapp.framework.AgentsRoomDataSource
+import com.valorantwiki.valorantwikiapp.framework.AgentsServerDataSource
+import com.valorantwiki.valorantwikiapp.framework.remote.RetrofitClient
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentListScreen
 import com.valorantwiki.valorantwikiapp.ui.screens.agents.AgentViewModel
 import com.valorantwiki.valorantwikiapp.ui.screens.detail.DetailAgentScreen
@@ -32,7 +32,7 @@ fun Navigation() {
     val navController = rememberNavController()
     val app = LocalContext.current.applicationContext as App
     val agentRepository = AgentRepository(
-        AgentRoomDataSource(app.db.agentDao),
+        AgentsRoomDataSource(app.db.agentDao),
         AgentsServerDataSource(RetrofitClient.instance)
     )
 

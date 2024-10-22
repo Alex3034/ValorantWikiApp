@@ -1,10 +1,9 @@
-package com.valorantwiki.valorantwikiapp.data.datasource.database
+package com.valorantwiki.valorantwikiapp.framework.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.valorantwiki.valorantwikiapp.domain.Agent
 import kotlinx.coroutines.flow.Flow
 
 @Dao
