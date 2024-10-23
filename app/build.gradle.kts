@@ -60,7 +60,7 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit.converter.kotlinx.serialization)
 
-    // Coil para cargar imágenes
+    // Coil
     implementation (libs.coil.kt.coil.compose)
 
     // ViewModels
@@ -70,6 +70,9 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":usecases"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

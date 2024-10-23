@@ -1,4 +1,4 @@
-package com.personalapps.mymoviedb.ui.common
+package com.valorantwiki.valorantwikiapp.ui.common
 
 import android.location.Address
 import android.location.Geocoder

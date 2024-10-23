@@ -1,11 +1,11 @@
 package com.valorantwiki.valorantwikiapp.framework
 
 import android.location.Geocoder
-import android.location.Location
-import com.personalapps.mymoviedb.ui.common.getFromLocationCompat
+import com.valorantwiki.valorantwikiapp.ui.common.getFromLocationCompat
 import com.valorantwiki.valorantwikiapp.data.datasource.DEFAULT_REGION
 import com.valorantwiki.valorantwikiapp.data.datasource.LocationDataSource
 import com.valorantwiki.valorantwikiapp.data.datasource.RegionDataSource
+import com.valorantwiki.valorantwikiapp.domain.Location
 
 class GeocoderRegionDataSource(
     private val geocoder: Geocoder,

@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Valorant WikiApp"
 include(":app")
- 
+include(":domain")
+include(":data")
+include(":usecases")
