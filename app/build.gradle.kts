@@ -54,25 +54,14 @@ android {
 
 dependencies {
 
-    // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.logging.interceptor)
-    implementation(libs.retrofit.converter.kotlinx.serialization)
-
-    // Coil
-    implementation (libs.coil.kt.coil.compose)
-
-    // ViewModels
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-
-    // Room
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":usecases"))
+    implementation(project(":domain:agent"))
+    implementation(project(":domain:region"))
+    implementation(project(":framework:core"))
+    implementation(project(":framework:agent"))
+    implementation(project(":framework:region"))
+    implementation(project(":feature:agent"))
+    implementation(project(":feature:detail"))
+    implementation(project(":feature:common"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -82,8 +71,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.room.ktx)
     implementation(libs.play.services.location)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
