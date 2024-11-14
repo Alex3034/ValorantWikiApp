@@ -4,6 +4,7 @@ import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 interface IAgentRepository {
     val agents: Flow<List<Agent>>
@@ -12,7 +13,7 @@ interface IAgentRepository {
     suspend fun toggleFavorite(agent: Agent)
 }
 
-class AgentRepository(
+class AgentRepository @Inject constructor(
     private val localDataSource: AgentLocalDataSource,
     private val remoteDataSource: AgentsRemoteDataSource
 ) : IAgentRepository {

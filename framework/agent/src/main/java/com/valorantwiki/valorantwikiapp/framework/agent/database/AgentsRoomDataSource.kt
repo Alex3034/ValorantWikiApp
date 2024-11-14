@@ -4,8 +4,9 @@ import com.valorantwiki.valorantwikiapp.domain.agent.data.AgentLocalDataSource
 import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class AgentsRoomDataSource(private val agentDao: AgentDao) : AgentLocalDataSource {
+internal class AgentsRoomDataSource @Inject constructor(private val agentDao: AgentDao) : AgentLocalDataSource {
     override val agents: Flow<List<Agent>> =
         agentDao.getAllAgents().map { agents -> agents.map { it.toDomainAgent() } }
 

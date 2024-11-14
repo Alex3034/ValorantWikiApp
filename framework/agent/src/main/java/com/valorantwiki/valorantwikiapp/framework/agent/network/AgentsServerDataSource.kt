@@ -3,8 +3,9 @@ package com.valorantwiki.valorantwikiapp.framework.agent.network
 import com.valorantwiki.valorantwikiapp.domain.agent.data.AgentsRemoteDataSource
 import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 import com.valorantwiki.valorantwikiapp.framework.agent.network.remoteResults.RemoteAgent
+import javax.inject.Inject
 
-class AgentsServerDataSource(
+internal class AgentsServerDataSource @Inject constructor(
     private val agentsService: AgentsService
 ) : AgentsRemoteDataSource {
 

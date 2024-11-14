@@ -2,6 +2,7 @@ package com.valorantwiki.valorantwikiapp.framework.agent.network
 
 import com.valorantwiki.valorantwikiapp.framework.agent.network.remoteResults.AgentsResponse
 import com.valorantwiki.valorantwikiapp.framework.agent.network.remoteResults.ApiResponse
+import dagger.Provides
 import retrofit2.http.GET
 import retrofit2.http.Path
 

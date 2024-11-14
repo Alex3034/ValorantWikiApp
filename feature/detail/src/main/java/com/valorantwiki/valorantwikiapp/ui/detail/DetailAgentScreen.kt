@@ -35,6 +35,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 import com.valorantwiki.valorantwikiapp.ui.common.AcScaffold
@@ -44,7 +45,7 @@ import com.valorantwiki.valorantwikiapp.ui.common.R as CommonR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailAgentScreen(vm: DetailAgentViewModel, onBack: () -> Unit) {
+fun DetailAgentScreen(vm: DetailAgentViewModel = hiltViewModel(), onBack: () -> Unit) {
 
     val state by vm.state.collectAsState()
     val detailState = rememberDetailState(state)

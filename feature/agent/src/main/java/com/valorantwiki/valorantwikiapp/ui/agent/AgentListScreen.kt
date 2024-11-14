@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.valorantwiki.valorantwikiapp.ui.common.PermissionRequestEffect
 import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
@@ -25,7 +26,7 @@ import com.valorantwiki.valorantwikiapp.ui.common.R as CommonR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel) {
+fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = hiltViewModel()) {
 
     val agentState = rememberAgentState()
 

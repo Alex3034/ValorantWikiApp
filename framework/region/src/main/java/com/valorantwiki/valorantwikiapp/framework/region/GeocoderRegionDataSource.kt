@@ -5,8 +5,9 @@ import com.valorantwiki.valorantwikiapp.data.datasource.DEFAULT_REGION
 import com.valorantwiki.valorantwikiapp.domain.region.data.LocationDataSource
 import com.valorantwiki.valorantwikiapp.data.datasource.RegionDataSource
 import com.valorantwiki.valorantwikiapp.domain.region.entities.Location
+import javax.inject.Inject
 
-class GeocoderRegionDataSource(
+internal class GeocoderRegionDataSource @Inject constructor(
     private val geocoder: Geocoder,
     private val locationDataSource: LocationDataSource
 ) : RegionDataSource {

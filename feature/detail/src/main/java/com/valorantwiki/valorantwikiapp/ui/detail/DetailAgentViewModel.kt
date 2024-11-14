@@ -8,11 +8,15 @@ import com.valorantwiki.valorantwikiapp.ui.common.ifSuccess
 import com.valorantwiki.valorantwikiapp.ui.common.stateAsResultIn
 import com.valorantwiki.valorantwikiapp.domain.agent.usecases.FindAgentByIdUseCase
 import com.valorantwiki.valorantwikiapp.domain.agent.usecases.ToggleFavoriteUseCase
+import com.valorantwiki.valorantwikiapp.ui.detail.di.AgentUuid
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailAgentViewModel(
-    agentUuid: String,
+@HiltViewModel
+class DetailAgentViewModel @Inject constructor(
+    @AgentUuid agentUuid: String,
     findAgentByIdUseCase: FindAgentByIdUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : ViewModel() {

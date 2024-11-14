@@ -6,9 +6,10 @@ import com.valorantwiki.valorantwikiapp.domain.region.data.LocationDataSource
 import com.valorantwiki.valorantwikiapp.domain.region.entities.Location
 import android.location.Location as AndroidLocation
 import kotlinx.coroutines.suspendCancellableCoroutine
+import javax.inject.Inject
 import kotlin.coroutines.resume
 
-class PlayServicesLocationDataSource(
+internal class PlayServicesLocationDataSource @Inject constructor(
     private val fusedLocationClient: FusedLocationProviderClient
 ) : LocationDataSource {
     override suspend fun findLastLocation(): Location? = fusedLocationClient.lastLocation()

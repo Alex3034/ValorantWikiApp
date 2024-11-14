@@ -1,5 +1,6 @@
 plugins {
     id("valorantwikiapp.android.application")
+    id("valorantwikiapp.di.library.compose")
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)

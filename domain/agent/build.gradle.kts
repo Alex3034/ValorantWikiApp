@@ -1,5 +1,6 @@
 plugins {
     id("java-library")
+    id("valorantwikiapp.di.library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
 }
 
