@@ -1,6 +1,7 @@
 package com.valorantwiki.valorantwikiapp.ui.detail.di
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.toRoute
 import com.valorantwiki.valorantwikiapp.ui.common.Detail
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,6 @@ class DetailViewModelModule {
     @ViewModelScoped
     @AgentUuid
     fun provideAgentId(savedStateHandle: SavedStateHandle): String {
-        return (savedStateHandle[Detail.toString()] ?: -1).toString()
+        return savedStateHandle.toRoute<Detail>().id
     }
 }
