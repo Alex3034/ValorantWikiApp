@@ -17,12 +17,13 @@ class AgentRepository @Inject constructor(
     private val localDataSource: AgentLocalDataSource,
     private val remoteDataSource: AgentsRemoteDataSource
 ) : IAgentRepository {
-    override val agents: Flow<List<Agent>> = localDataSource.agents.onEach { localAgents ->
-        if (localAgents.isEmpty()) {
-            val remoteAgents = remoteDataSource.fetchAgents()
-            localDataSource.save(remoteAgents)
+    override val agents: Flow<List<Agent>>
+        get() = localDataSource.agents.onEach { localAgents ->
+            if (localAgents.isEmpty()) {
+                val remoteAgents = remoteDataSource.fetchAgents()
+                localDataSource.save(remoteAgents)
+            }
         }
-    }
 
     override fun findAgentById(uuid: String): Flow<Agent> = localDataSource.getAgentById(uuid)
         .onEach { agent ->

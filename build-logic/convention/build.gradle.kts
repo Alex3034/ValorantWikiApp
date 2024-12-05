@@ -20,5 +20,9 @@ gradlePlugin{
             id = "valorantwikiapp.di.library.compose"
             implementationClass = "DiLibraryComposeConventionPlugin"
         }
+        register("jvmLibrary") {
+            id = "valorantwikiapp.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }

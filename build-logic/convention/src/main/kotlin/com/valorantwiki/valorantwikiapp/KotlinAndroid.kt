@@ -36,3 +36,17 @@ internal fun Project.configureKotlinAndroid(
         add("implementation", libs.findLibrary("androidx.lifecycle.runtime.ktx").get())
     }
 }
+
+/**
+ * Configure base Kotlin options for JVM (non-Android)
+ */
+internal fun Project.configureKotlinJvm() {
+    extensions.configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    dependencies {
+        add("testImplementation", libs.findLibrary("junit").get())
+        add("testImplementation", libs.findLibrary("mockito.kotlin").get())
+    }
+}
