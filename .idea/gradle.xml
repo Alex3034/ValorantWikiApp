@@ -35,6 +35,8 @@
             <option value="$PROJECT_DIR$/framework/agent" />
             <option value="$PROJECT_DIR$/framework/core" />
             <option value="$PROJECT_DIR$/framework/region" />
+            <option value="$PROJECT_DIR$/test" />
+            <option value="$PROJECT_DIR$/test/unit" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

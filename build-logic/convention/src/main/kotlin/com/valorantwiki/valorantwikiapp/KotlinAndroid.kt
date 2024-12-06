@@ -46,6 +46,7 @@ internal fun Project.configureKotlinJvm() {
         targetCompatibility = JavaVersion.VERSION_17
     }
     dependencies {
+        add("implementation", libs.findLibrary("kotlinx.coroutines.core").get())
         add("testImplementation", libs.findLibrary("junit").get())
         add("testImplementation", libs.findLibrary("mockito.kotlin").get())
     }

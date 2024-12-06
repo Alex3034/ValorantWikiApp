@@ -1,4 +1,4 @@
-package com.valorantwiki.valorantwikiapp.domain.agent.usecases
+package com.valorantwiki.valorantwikiapp
 
 import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 

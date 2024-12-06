@@ -1,7 +1,7 @@
 package com.valorantwiki.valorantwikiapp.domain.agent.data
 
-import com.valorantwiki.valorantwikiapp.domain.agent.usecases.sampleAgent
-import com.valorantwiki.valorantwikiapp.domain.agent.usecases.sampleAgents
+import com.valorantwiki.valorantwikiapp.sampleAgent
+import com.valorantwiki.valorantwikiapp.sampleAgents
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf

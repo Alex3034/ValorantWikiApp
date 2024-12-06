@@ -1,6 +1,7 @@
 package com.valorantwiki.valorantwikiapp.domain.agent.usecases
 
 import com.valorantwiki.valorantwikiapp.domain.agent.data.AgentRepository
+import com.valorantwiki.valorantwikiapp.sampleAgent
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.mockito.Mockito.mock
