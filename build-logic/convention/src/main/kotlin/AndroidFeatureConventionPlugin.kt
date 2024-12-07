@@ -12,7 +12,10 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             dependencies {
                 add("implementation", project(":feature:common"))
+                add("testImplementation", project(":test:unit"))
                 add("implementation", libs.findLibrary("androidx.lifecycle.viewmodel.compose").get())
+                add("testImplementation", libs.findLibrary("kotlinx.coroutines.test").get())
+                add("testImplementation", libs.findLibrary("turbine").get())
             }
         }
     }

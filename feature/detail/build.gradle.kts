@@ -10,7 +10,4 @@ android {
 dependencies {
 
     implementation(project(":domain:agent"))
-    testImplementation(project(":test:unit"))
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.turbine)
 }
