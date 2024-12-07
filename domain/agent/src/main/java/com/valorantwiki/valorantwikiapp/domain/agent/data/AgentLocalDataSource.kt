@@ -7,5 +7,5 @@ interface AgentLocalDataSource {
     val agents: Flow<List<Agent>>
     fun getAgentById(uuid: String): Flow<Agent?>
 
-    suspend fun save(movies: List<Agent>)
+    suspend fun save(agents: List<Agent>)
 }
