@@ -54,4 +54,6 @@ dependencies {
     implementation(libs.play.services.location)
     androidTestImplementation(libs.hilt.android.testing)
     kspAndroidTest(libs.hilt.compiler)
+    androidTestImplementation(libs.androidx.room.ktx)
+    kspAndroidTest(libs.androidx.room.compiler)
 }

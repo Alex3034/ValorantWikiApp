@@ -13,9 +13,15 @@ import javax.inject.Singleton
 internal object FrameworkCoreModule {
 
     @Provides
-    @Singleton
-    fun provideDatabase(app: Application) = Room.databaseBuilder(app, AgentsDataBase::class.java, "agent-db").build()
+    fun provideAgentDao(dataBase: AgentsDataBase) = dataBase.agentDao()
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object FrameworkCoreExtrasModule {
 
     @Provides
-    fun provideAgentDao(dataBase: AgentsDataBase) = dataBase.agentDao()
+    @Singleton
+    fun provideDatabase(app: Application) =
+        Room.databaseBuilder(app, AgentsDataBase::class.java, "agent-db").build()
 }

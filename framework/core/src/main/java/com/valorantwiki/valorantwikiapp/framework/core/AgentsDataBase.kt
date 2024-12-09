@@ -8,6 +8,6 @@ import com.valorantwiki.valorantwikiapp.framework.agent.database.DbAgent
 
 @Database(entities = [DbAgent::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-internal abstract class AgentsDataBase: RoomDatabase() {
+abstract class AgentsDataBase: RoomDatabase() {
     abstract fun agentDao(): AgentDao
 }
