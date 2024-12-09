@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -54,7 +53,7 @@ fun <T> AcScaffold(
     ) { padding ->
         when (state) {
             is Result.Loading -> {
-                CircularProgressIndicator(modifier = Modifier.padding(padding))
+                LoadingIndicator(modifier = modifier, padding = padding)
             }
             is Result.Error -> {
                 ErrorText(
@@ -68,6 +67,7 @@ fun <T> AcScaffold(
         }
     }
 }
+
 @Composable
 fun ErrorText(error: Throwable, modifier: Modifier) {
     Column(
