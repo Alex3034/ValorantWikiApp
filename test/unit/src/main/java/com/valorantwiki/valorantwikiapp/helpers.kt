@@ -4,8 +4,8 @@ import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 
 fun sampleAgent(uuid: String) = Agent(
     uuid = uuid,
- displayName= "Name",
-description = "Description",
+ displayName= "Name $uuid",
+description = "Description $uuid",
  displayIcon = "Icon",
  fullPortrait = "Portrait",
  background = "Background",

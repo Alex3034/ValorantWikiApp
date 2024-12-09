@@ -17,26 +17,39 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModel
-import com.valorantwiki.valorantwikiapp.ui.common.PermissionRequestEffect
 import com.valorantwiki.valorantwikiapp.domain.agent.entities.Agent
 import com.valorantwiki.valorantwikiapp.ui.common.AcScaffold
+import com.valorantwiki.valorantwikiapp.ui.common.PermissionRequestEffect
+import com.valorantwiki.valorantwikiapp.ui.common.Result
 import com.valorantwiki.valorantwikiapp.ui.common.Screen
 import com.valorantwiki.valorantwikiapp.ui.common.R as CommonR
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = hiltViewModel()) {
-
-    val agentState = rememberAgentState()
-
+fun AgentListScreen(
+    onAgentClick: (Agent) -> Unit,
+    vm: AgentViewModel = hiltViewModel()
+) {
     PermissionRequestEffect(permission = Manifest.permission.ACCESS_COARSE_LOCATION) {
         vm.onUiReady()
     }
 
-    Screen {
-        val state by vm.state.collectAsState()
+    val state by vm.state.collectAsState()
 
+    AgentListScreen(
+        state = state,
+        onAgentClick = onAgentClick
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AgentListScreen(
+    state: Result<List<Agent>>,
+    onAgentClick: (Agent) -> Unit
+) {
+    val agentState = rememberAgentState()
+
+    Screen {
         AcScaffold(
             state = state,
             topBar = {
@@ -51,7 +64,8 @@ fun AgentListScreen(onAgentClick: (Agent) -> Unit, vm: AgentViewModel = hiltView
 
             LazyColumn(
                 contentPadding = padding,
-                modifier = Modifier.padding(horizontal = 4.dp)) {
+                modifier = Modifier.padding(horizontal = 4.dp)
+            ) {
                 items(agents, key = { it.uuid }) {
                     AgentItem(
                         agent = it,
