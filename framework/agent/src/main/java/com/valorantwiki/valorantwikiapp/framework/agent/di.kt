@@ -20,7 +20,7 @@ import retrofit2.create
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class FrameworkMovieModule {
+internal abstract class FrameworkAgentModule {
     @Binds
     abstract fun bindLocalDataSource(localDataSource: AgentsRoomDataSource): AgentLocalDataSource
 

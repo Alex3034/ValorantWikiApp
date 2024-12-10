@@ -51,7 +51,9 @@ class AgentListScreenTest {
         setContent {
             AgentListScreen(
                 state = Result.Success(agents),
-                onAgentClick = { clickedAgentUuid = it.uuid }
+                onAgentClick = {
+                    clickedAgentUuid = it.uuid
+                }
             )
         }
         onNodeWithText("Name 2").performClick()

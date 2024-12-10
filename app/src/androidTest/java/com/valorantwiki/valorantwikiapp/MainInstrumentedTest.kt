@@ -14,7 +14,7 @@ import org.junit.Test
 import javax.inject.Inject
 
 @HiltAndroidTest
-class ExampleInstrumentedTest {
+class MainInstrumentedTest {
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
@@ -36,13 +36,13 @@ class ExampleInstrumentedTest {
     fun check_4_items_db() = runTest {
         agentsDao.save(buildDatabaseAgents("1", "2", "3", "4"))
         val agents = agentsDao.getAllAgents().first()
-        assertEquals("4", agents.size.toString())
+        assertEquals(4, agents.size)
     }
 
     @Test
     fun check_6_items_db() = runTest {
         agentsDao.save(buildDatabaseAgents("1", "2", "3", "4", "5", "6"))
-        assertEquals("6", agentsDao.getAllAgents().first().size.toString())
+        assertEquals(6, agentsDao.getAllAgents().first().size)
     }
 }
 

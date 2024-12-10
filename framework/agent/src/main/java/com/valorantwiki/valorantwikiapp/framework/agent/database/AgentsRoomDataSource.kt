@@ -13,7 +13,7 @@ internal class AgentsRoomDataSource @Inject constructor(private val agentDao: Ag
     override fun getAgentById(uuid: String): Flow<Agent?> =
         agentDao.getAgentById(uuid).map { it?.toDomainAgent() }
 
-    override suspend fun save(movies: List<Agent>) = agentDao.save(movies.map { it.toDbAgent() })
+    override suspend fun save(agents: List<Agent>) = agentDao.save(agents.map { it.toDbAgent() })
 }
 
 private fun DbAgent.toDomainAgent() = Agent(
