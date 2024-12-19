@@ -37,7 +37,7 @@ Este proyecto fue creado con el propósito de aprender y aplicar conceptos avanz
 
 Si tienes preguntas o sugerencias, no dudes en contactarme:
 - **Email:** alejandrohm98a@gmail.com
-- **GitHub:** [@tuusuario](https://github.com/Alex3034)
+- **GitHub:** [@Alex3034](https://github.com/Alex3034)
 
 ---
 
